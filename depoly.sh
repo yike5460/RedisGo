@@ -1,12 +1,5 @@
 #!/bin/bash
 # author: ke.yi (aaron)
-echo -e "\033[47;34mdownload necessary packages\033[0m"
-apt-get install -y gcc g++
-apt-get install -y libjemalloc-dev
-apt-get install -y libhiredis-dev
-apt-get install -y tcl
-apt-get install -y ruby
-apt-get install -y make
 
 #ARGS=$(getopt -o hf: -- "$@")
 #if [ $? != 0 ]; then echo "terminating ..." >&2; exit; fi
@@ -39,22 +32,31 @@ apt-get install -y make
 while getopts :f:n:p:v:h opt
 do 
     case "$opt" in 
-      f) echo "debug, f option with value $OPTARG"
+      f) echo "debug usage, f option with value $OPTARG"
 	 FOLDER=$OPTARG;;
-      p) echo "debug, p option with value $OPTARG"
+      p) echo "debug usage, p option with value $OPTARG"
 	 PORT=$OPTARG;;
-      n) echo "debug, n option with value $OPTARG"
+      n) echo "debug usage, n option with value $OPTARG"
 	 NODES=$OPTARG;;
-      v) echo "debug, v option with value $OPTARG"
+      v) echo "debug usage, v option with value $OPTARG"
 	 VERSION=$OPTARG;;
-      h) echo "debug, h option"
+      h) echo "available action as follows:"
 	 echo -e "\t-f: assign folder path to store package"
 	 echo -e "\t-p: assign port number to start with"
 	 echo -e "\t-n: assign cluster node number"
-	 echo -e "\t-v: assign redis version";;
+	 echo -e "\t-v: assign redis version"
+	 exit;;
       *) echo "unknown option: $opt";;
     esac
 done
+
+echo -e "\033[47;34mdownload necessary packages\033[0m"
+apt-get install -y gcc g++
+apt-get install -y libjemalloc-dev
+apt-get install -y libhiredis-dev
+apt-get install -y tcl
+apt-get install -y ruby
+apt-get install -y make
 
 echo -e "\033[47;34mdownload redis and compile\033[0m"
 if [ -z "$(wget http://download.redis.io/releases/redis-$VERSION.tar.gz)" ]; then
