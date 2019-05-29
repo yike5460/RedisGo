@@ -120,7 +120,7 @@ lazyfree-lazy-expire no
 lazyfree-lazy-server-del no
 replica-lazy-flush no
 appendonly yes
-appendfilename “appendonly.aof”
+appendfilename appendonly.aof
 appendfsync everysec
 no-appendfsync-on-rewrite no
 auto-aof-rewrite-percentage 100
